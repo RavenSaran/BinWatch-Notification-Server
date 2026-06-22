@@ -33,16 +33,19 @@ const path = require("path");
  * ==========================================================================*/
 
 const CONFIG = {
-  serviceAccountPath:
-    process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH ||
-    path.join(__dirname, "./serviceAccountKey.json"),
   databaseURL:
     process.env.FIREBASE_DATABASE_URL ||
     "https://binwatch-iot-default-rtdb.firebaseio.com/",
+
   fullThresholdPercent: 80,
-  notificationTtlMs: 86400000, // 24 hours
+  notificationTtlMs: 86400000,
   maxBinsInSummary: 3,
-  userRoles: ["cleaners", "supervisors", "admins"],
+
+  userRoles: [
+    "cleaners",
+    "supervisors",
+    "admins",
+  ],
 };
 
 if (!process.env.FIREBASE_DATABASE_URL) {
