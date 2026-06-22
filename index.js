@@ -52,7 +52,18 @@ if (!process.env.FIREBASE_DATABASE_URL) {
   );
 }
 
-const serviceAccount = require(CONFIG.serviceAccountPath);
+let serviceAccount;
+
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+  console.log("[firebase] Loading credentials from FIREBASE_SERVICE_ACCOUNT");
+
+  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+} else {
+  console.log("[firebase] Loading credentials from local serviceAccountKey.json");
+
+  serviceAccount = require(CONFIG.serviceAccountPath);
+}
 
 const app = initializeApp({
   credential: cert(serviceAccount),
